@@ -9,7 +9,7 @@ public class Produit {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column
+  @Column(name="identifier")
   private Long identifier;
 
   @Column

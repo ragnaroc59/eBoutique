@@ -37,12 +37,10 @@ public class AccueilController {
     
     return mv;
   }
-  
-  
+
   @GetMapping("/accueil/{marque}")
   public ModelAndView displayMarque(@PathVariable String marque) {
     ModelAndView mv = new ModelAndView("public/accueil/marque");
-    mv.addObject("marques", this.marqueService.findAll());
     mv.addObject("products", this.produitService.findProduitByMarque(marque));
     
     //TODO Recuperer les 10 premiers produits correspondant à la marque recherché

@@ -29,18 +29,14 @@ public class MarqueDao {
     entityManager = factory.createEntityManager();
     entityManager.getTransaction().begin();
 
-    List<Marque> marqueList = entityManager.createQuery(
-            "SELECT q FROM Marque q").getResultList();
+    List<Marque> marqueList = entityManager.createNativeQuery(
+            "SELECT * FROM Marque q").getResultList();
     entityManager.getTransaction().commit();
     entityManager.close();
     factory.close();
 
     if (marqueList == null) {
       System.out.println("Pas de marque trouvée ! ");
-    } else {
-      for (Marque marque : marqueList) {
-        System.out.print(" - Marque :" +marque.getLibelle() + " nombre de produit de cette marque : " + marque.getProduits().size());
-      }
     }
 
     return marqueList;
@@ -53,15 +49,50 @@ public class MarqueDao {
     entityManager = factory.createEntityManager();
     entityManager.getTransaction().begin();
 
-    List<Marque> marqueList = entityManager.createQuery(
-            "SELECT q FROM Marque q WHERE libelle LIKE :custName").setParameter("custName",libelle).getResultList();
+    List<Object[]> marqueList = entityManager.createNativeQuery(
+            "SELECT * FROM Marque m WHERE libelle = :lbl").setParameter("lbl",libelle).getResultList();
     entityManager.getTransaction().commit();
     entityManager.close();
     factory.close();
+    Marque marque = new Marque();
 
     if (marqueList == null) {
       System.out.println("Pas de marque trouvée ! ");
+    }else{
+      for (Object[] ma: marqueList) {
+        Long id = Long.parseLong(ma[0].toString());
+        marque.setIdentifier(id);
+        break;
+      }
     }
-    return marqueList.get(0);
+
+    return marque;
+  }
+
+  public Marque findById(Long marqueId){
+    EntityManagerFactory factory = Persistence
+            .createEntityManagerFactory("eboutique-business");
+    entityManager = factory.createEntityManager();
+    entityManager.getTransaction().begin();
+
+    List<Object[]> marqueList = entityManager.createNativeQuery(
+            "SELECT * FROM Marque m WHERE id = :marqueId").setParameter("marqueId",marqueId).getResultList();
+    entityManager.getTransaction().commit();
+    entityManager.close();
+    factory.close();
+    Marque marque = new Marque();
+
+    if (marqueList == null) {
+      System.out.println("Pas de marque trouvée ! ");
+    }else{
+      for (Object[] ma: marqueList) {
+        Long id = Long.parseLong(ma[0].toString());
+        marque.setLibelle(ma[1].toString());
+        marque.setIdentifier(id);
+        break;
+      }
+    }
+
+    return marque;
   }
 }
