@@ -1,6 +1,3 @@
 language: java
 - mvn install
-- mvn sonar:sonar -Dsonar.projectKey=$SONAR_PROJECT_KEY
-- mvn sonar:sonar -Dsonar.organization=$SONAR_ORGANIZATION
-- mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN
-- mvn sonar:sonar -Dsonar.host.url=$SONAR_HOST
+- mvn sonar:sonar -Dsonar.projectKey=$SONAR_PROJECT_KEY -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=$SONAR_HOST
