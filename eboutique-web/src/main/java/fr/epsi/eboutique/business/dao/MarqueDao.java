@@ -21,6 +21,7 @@ public class MarqueDao {
   @PersistenceContext
   private EntityManager entityManager;
   
+
   public Collection<Marque> findAll(){
 
     EntityManagerFactory factory = Persistence
@@ -45,4 +46,22 @@ public class MarqueDao {
     return marqueList;
   }
 
+  public Marque findByLibelle(String libelle){
+
+    EntityManagerFactory factory = Persistence
+            .createEntityManagerFactory("eboutique-business");
+    entityManager = factory.createEntityManager();
+    entityManager.getTransaction().begin();
+
+    List<Marque> marqueList = entityManager.createQuery(
+            "SELECT q FROM Marque q WHERE libelle LIKE :custName").setParameter("custName",libelle).getResultList();
+    entityManager.getTransaction().commit();
+    entityManager.close();
+    factory.close();
+
+    if (marqueList == null) {
+      System.out.println("Pas de marque trouvée ! ");
+    }
+    return marqueList.get(0);
+  }
 }

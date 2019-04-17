@@ -2,6 +2,7 @@ package fr.epsi.eboutique.web.controller.site;
 
 import javax.inject.Inject;
 
+import fr.epsi.eboutique.business.service.ProduitService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,9 @@ public class AccueilController {
 
   @Inject
   private MarqueService marqueService;
+
+  @Inject
+  private ProduitService produitService;
   
   /**
    * Permet d'afficher la page d'accueil
@@ -37,8 +41,9 @@ public class AccueilController {
   
   @GetMapping("/accueil/{marque}")
   public ModelAndView displayMarque(@PathVariable String marque) {
-    ModelAndView mv = new ModelAndView("public/accueil");
+    ModelAndView mv = new ModelAndView("public/accueil/marque");
     mv.addObject("marques", this.marqueService.findAll());
+    mv.addObject("products", this.produitService.findProduitByMarque(marque));
     
     //TODO Recuperer les 10 premiers produits correspondant à la marque recherché
     
