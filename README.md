@@ -1317,3 +1317,6 @@ Security Statement
 TRAVIS CI STATUS
 ●
 Travis CI Status
+
+
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=-Dsonar.projectKey=ragnaroc59_eBoutique \&metric=alert_status)](https://sonarcloud.io/dashboard/index/project.key)
