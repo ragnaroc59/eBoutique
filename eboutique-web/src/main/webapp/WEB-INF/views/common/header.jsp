@@ -1,5 +1,12 @@
 <%@ page isELIgnored="false"  %>
 <%@ taglib uri = "http://java.sun.com/jstl/core_rt" prefix = "c" %>
+
+<style>
+.selectOption{
+  padding: 8px;
+}
+</style>
+
 <header class="header-section">
 	<div class="header-top">
 		<div class="container">
@@ -13,8 +20,9 @@
 	<nav class="main-navbar">
 		<div class="container">
 			<nav class="nav">
-				<!-- Afficher la liste des marques en exploitant l'attribut marque en utilisant c:forEach  -->
-				<a class="nav-link" href="#">Une marque</a>
+               <c:forEach var="marque" items="${marques}">
+                 <a class="nav-link" href="http://localhost:8090/eboutique-web/accueil/${marque.libelle}">${marque.libelle}</a>
+               </c:forEach>
 			</nav>
 		</div>
 	</nav>

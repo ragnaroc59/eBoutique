@@ -30,8 +30,8 @@ public class ProduitDao {
         entityManager = factory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        List<Produit> produitList = entityManager.createQuery(
-                "SELECT q FROM Produit q").getResultList();
+        List<Object[]> produitList = entityManager.createNativeQuery(
+                "SELECT * FROM Produit").getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
         factory.close();
@@ -40,7 +40,20 @@ public class ProduitDao {
             System.out.println("Pas de marque trouvée ! ");
         }
 
-        return produitList;
+        Collection<Produit> productToReturn = new ArrayList<>();
+        for(Object[] product : produitList)
+        {
+            Produit produit = new Produit();
+            produit.setLibelle(product[1].toString());
+            produit.setIdentifier(Long.parseLong(product[0].toString()));
+            produit.setImage(product[5].toString());
+            produit.setMarque(marqueDao.findById(Long.parseLong(product[4].toString())));
+            produit.setDescription(product[2].toString());
+            produit.setPrix(BigDecimal.valueOf(Double.parseDouble(product[3].toString()))); //prix
+            productToReturn.add(produit);
+        }
+
+        return productToReturn;
     }
 
     public Collection<Produit> findProduitByMarque(String marque){
@@ -69,6 +82,7 @@ public class ProduitDao {
             produit.setDescription(ma[2].toString()); //description
             produit.setPrix(BigDecimal.valueOf(Double.parseDouble(ma[3].toString()))); //prix
             produit.setMarque(marqueDao.findById(Long.parseLong(ma[4].toString()))); //marque_id
+            produit.setImage(ma[5].toString()); // image
             products.add(produit);
         }
 
