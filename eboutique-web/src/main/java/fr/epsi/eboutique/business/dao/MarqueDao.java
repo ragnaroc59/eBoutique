@@ -1,5 +1,6 @@
 package fr.epsi.eboutique.business.dao;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -29,14 +30,25 @@ public class MarqueDao {
     entityManager = factory.createEntityManager();
     entityManager.getTransaction().begin();
 
-    List<Marque> marqueList = entityManager.createNativeQuery(
-            "SELECT * FROM Marque q").getResultList();
+    List<Object[]> marqueFromBase = entityManager.createNativeQuery(
+            "SELECT * FROM Marque").getResultList();
     entityManager.getTransaction().commit();
     entityManager.close();
     factory.close();
 
-    if (marqueList == null) {
+
+    if (marqueFromBase == null) {
       System.out.println("Pas de marque trouvée ! ");
+    }
+
+    Collection<Marque> marqueList = new ArrayList<>();
+
+    for (Object[] ma: marqueFromBase)
+    {
+      Marque marque = new Marque();
+      marque.setIdentifier(Long.parseLong(ma[0].toString()));
+      marque.setLibelle(ma[1].toString());
+      marqueList.add(marque);
     }
 
     return marqueList;

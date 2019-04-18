@@ -30,6 +30,7 @@ public class AccueilController {
   public ModelAndView displayAccueil(@RequestParam(required = false) String critere) {
     ModelAndView mv = new ModelAndView("public/accueil");
     mv.addObject("marques", this.marqueService.findAll());
+    mv.addObject("allProducts",this.produitService.findAll());
     
     //TODO Recuperer les 10 premiers produits
     

@@ -21,6 +21,9 @@ public class Produit {
   @Column
   private BigDecimal prix;
 
+  @Column
+  private String image;
+
   @ManyToOne(fetch = FetchType.EAGER)
   private Marque marque;
 
@@ -63,6 +66,13 @@ public class Produit {
   public void setMarque(Marque marque) {
     this.marque = marque;
   }
-  
-  
+
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
+  }
 }
