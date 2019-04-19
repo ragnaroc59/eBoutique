@@ -9,7 +9,7 @@ public class Marque {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "identifier")
+  @Column(name = "id")
   private Long identifier;
 
   @Column

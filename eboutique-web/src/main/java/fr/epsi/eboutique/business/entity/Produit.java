@@ -9,7 +9,7 @@ public class Produit {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name="identifier")
+  @Column(name="id")
   private Long identifier;
 
   @Column
@@ -25,6 +25,7 @@ public class Produit {
   private String image;
 
   @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "marque_id")
   private Marque marque;
 
   public Long getIdentifier() {

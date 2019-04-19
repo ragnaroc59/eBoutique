@@ -57,6 +57,8 @@ public class ProduitDao {
     }
 
     public Collection<Produit> findProduitByMarque(String marque){
+        return this.entityManager.createQuery("from Produit p where p.marque=:marque").setParameter("marque", marqueDao.findByLibelle(marque)).getResultList();
+        /*
 
         EntityManagerFactory factory = Persistence
                 .createEntityManagerFactory("eboutique-business");
@@ -86,7 +88,7 @@ public class ProduitDao {
             products.add(produit);
         }
 
-        return products;
+        return products;*/
     }
 
     public Produit findProduitById(Long productId){
@@ -118,5 +120,33 @@ public class ProduitDao {
         }
 
         return produit;
+    }
+
+    public Collection<Produit> findByResearch(String word){
+       return this.entityManager.createQuery("from Produit p where p.libelle like :libelle").setParameter("libelle", "%"+word+"%").getResultList();
+/*        List<Object[]> produitList = entityManager.createNativeQuery(
+                "SELECT * FROM Produit WHERE libelle LIKE '%':searchWord'%'").setParameter("searchWord",word).getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        factory.close();
+
+        if (produitList == null) {
+            System.out.println("Pas de marque trouvée ! ");
+        }
+
+        Collection<Produit> productToReturn = new ArrayList<>();
+        for(Object[] product : produitList)
+        {
+            Produit produit = new Produit();
+            produit.setLibelle(product[1].toString());
+            produit.setIdentifier(Long.parseLong(product[0].toString()));
+            produit.setImage(product[5].toString());
+            produit.setMarque(marqueDao.findById(Long.parseLong(product[4].toString())));
+            produit.setDescription(product[2].toString());
+            produit.setPrix(BigDecimal.valueOf(Double.parseDouble(product[3].toString()))); //prix
+            productToReturn.add(produit);
+        }
+
+        return productToReturn;*/
     }
 }

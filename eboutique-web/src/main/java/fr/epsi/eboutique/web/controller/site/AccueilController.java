@@ -31,16 +31,18 @@ public class AccueilController {
    * @return
    */
   @GetMapping("/accueil")
-  public ModelAndView displayAccueil(@RequestParam(required = false) String critere) {
-    ModelAndView mv = new ModelAndView("public/accueil");
-    mv.addObject("marques", this.marqueService.findAll());
-    mv.addObject("allProducts",this.produitService.findAll());
-    
-    //TODO Recuperer les 10 premiers produits
-    
-    //TODO Recuperer le nombre total de produits afin de permettre la pagination
-    
-    return mv;
+  public ModelAndView displayAccueil(@RequestParam(required = false, name = "critere") String critere) {
+    if(critere==null){
+        ModelAndView mv = new ModelAndView("public/accueil");
+        mv.addObject("marques", this.marqueService.findAll());
+        mv.addObject("allProducts",this.produitService.findAll());
+        return mv;
+    }else{
+        ModelAndView mv = new ModelAndView("public/accueil");
+        mv.addObject("marques", this.marqueService.findAll());
+        mv.addObject("allProducts", this.produitService.findByResearch(critere));
+        return mv;
+    }
   }
 
   @GetMapping("/accueil/{marque}")
@@ -58,7 +60,7 @@ public class AccueilController {
 
   @GetMapping("/commande")
   public ModelAndView displayPanel() {
-    ModelAndView mv = new ModelAndView("public/panel/panel");
+    ModelAndView mv = new ModelAndView("public/command/command");
     mv.addObject("commands", this.commandeService.findAll());
 
     //TODO Recuperer les 10 premiers produits correspondant à la marque recherché

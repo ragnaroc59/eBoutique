@@ -22,4 +22,6 @@ public class ProduitService {
     }
 
     public Produit findProduitById(Long productId){return produitDao.findProduitById(productId);}
+
+    public Collection<Produit> findByResearch(String word){ return produitDao.findByResearch(word);}
 }
