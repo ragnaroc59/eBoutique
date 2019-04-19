@@ -88,4 +88,35 @@ public class ProduitDao {
 
         return products;
     }
+
+    public Produit findProduitById(Long productId){
+        EntityManagerFactory factory = Persistence
+                .createEntityManagerFactory("eboutique-business");
+        entityManager = factory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        List<Object[]> produitList = entityManager.createNativeQuery(
+                "SELECT * FROM Produit WHERE id  = :productId").setParameter("productId",productId).getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        factory.close();
+
+        if (produitList == null) {
+            System.out.println("Pas de marque trouvée ! ");
+        }
+
+        Produit produit = new Produit();
+
+        for (Object[] ma: produitList) {
+            produit.setIdentifier(Long.parseLong(ma[0].toString())); //id
+            produit.setLibelle(ma[1].toString()); //libelle
+            produit.setDescription(ma[2].toString()); //description
+            produit.setPrix(BigDecimal.valueOf(Double.parseDouble(ma[3].toString()))); //prix
+            produit.setMarque(marqueDao.findById(Long.parseLong(ma[4].toString()))); //marque_id
+            produit.setImage(ma[5].toString()); // image
+            break;
+        }
+
+        return produit;
+    }
 }

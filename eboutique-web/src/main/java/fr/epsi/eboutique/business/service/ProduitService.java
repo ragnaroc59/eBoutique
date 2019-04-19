@@ -20,4 +20,6 @@ public class ProduitService {
     public Collection<Produit> findAll(){
         return produitDao.findAll();
     }
+
+    public Produit findProduitById(Long productId){return produitDao.findProduitById(productId);}
 }
