@@ -17,7 +17,7 @@
 <tr>
 <td align="justify">${produit.libelle}</td> <br>
 <img src="${produit.image}"  width="50" height="75" /><br>
-<td align="justify">${produit.prix}</td> <br>
+<td align="justify">prix : ${produit.prix}</td> <br>
 </tr>
 </div>
 </c:forEach>

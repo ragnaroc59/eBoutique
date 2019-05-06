@@ -26,17 +26,17 @@
 
 <body>
 <jsp:include page="../../common/header.jsp"></jsp:include>
-
-<c:forEach var="produit" items="${products}">
-<div class="main">
-<tr>
-<td align="justify">${produit.libelle}</td> <br>
-<img class ="displayed" src="${produit.image}"  width="50" height="75" /><br>
-<td align="justify">${produit.prix}</td> <br>
-</tr>
-</div>
-</c:forEach>
-
+    <main class="container">
+    <c:forEach var="produit" items="${products}">
+        <div class="main">
+            <tr>
+                <td align="justify">${produit.libelle}</td> <br>
+                <img class ="displayed" src="${produit.image}"  width="50" height="75" /><br>
+                <td align="justify">${produit.prix}</td> <br>
+            </tr>
+        </div>
+    </c:forEach>
+<main>
 </body>
 </html>
 

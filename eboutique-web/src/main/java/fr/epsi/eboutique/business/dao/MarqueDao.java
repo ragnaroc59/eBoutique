@@ -21,11 +21,13 @@ public class MarqueDao {
    */
   @PersistenceContext
   private EntityManager entityManager;
-  
+
 
   public Collection<Marque> findAll(){
 
-    EntityManagerFactory factory = Persistence
+    return this.entityManager.createQuery("from Marque m").getResultList();
+
+    /*EntityManagerFactory factory = Persistence
             .createEntityManagerFactory("eboutique-business");
     entityManager = factory.createEntityManager();
     entityManager.getTransaction().begin();
@@ -51,7 +53,7 @@ public class MarqueDao {
       marqueList.add(marque);
     }
 
-    return marqueList;
+    return marqueList;*/
   }
 
   public Marque findByLibelle(String libelle){

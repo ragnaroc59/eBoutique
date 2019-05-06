@@ -9,7 +9,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,8 +23,9 @@ public class ProduitDao {
 
 
     public Collection<Produit> findAll(){
+        return this.entityManager.createQuery("from Produit p").getResultList();
 
-        EntityManagerFactory factory = Persistence
+        /*EntityManagerFactory factory = Persistence
                 .createEntityManagerFactory("eboutique-business");
         entityManager = factory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -53,7 +53,7 @@ public class ProduitDao {
             productToReturn.add(produit);
         }
 
-        return productToReturn;
+        return productToReturn;*/
     }
 
     public Collection<Produit> findProduitByMarque(String marque){

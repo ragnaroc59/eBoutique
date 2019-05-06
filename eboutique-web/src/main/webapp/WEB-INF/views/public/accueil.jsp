@@ -25,8 +25,10 @@
 			<div class="row">
 				<div class="col-md-4">
 				   <h2>RECHERCHE</h2><br>
-				   <input type="text"/><br><br>
-				   <button type="submit">Rechercher</button>
+				   <form >
+                       <input type="text" name="critere" placeholder="Votre recherche"/><br><br>
+                       <input type="submit" value="Rechercher"/>
+				   </form>
 				</div>
 				<div class="col-md-8">
 				<!-- Afficher la liste des mobiles -->

@@ -31,7 +31,7 @@ public class AccueilController {
    * @return
    */
   @GetMapping("/accueil")
-  public ModelAndView displayAccueil(@RequestParam(required = false, name = "critere") String critere) {
+  public ModelAndView displayAccueil(@RequestParam(required = false) String critere) {
     if(critere==null){
         ModelAndView mv = new ModelAndView("public/accueil");
         mv.addObject("marques", this.marqueService.findAll());
