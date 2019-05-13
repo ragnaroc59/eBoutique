@@ -29,6 +29,7 @@
                        <input type="text" name="critere" placeholder="Votre recherche"/><br><br>
                        <input type="submit" value="Rechercher"/>
 				   </form>
+                   <a href="http://localhost:8090/eboutique-web/accueil">retour</a>
 				</div>
 				<div class="col-md-8">
 				<!-- Afficher la liste des mobiles -->

@@ -21,14 +21,15 @@
                 <c:forEach var="ligne" items="${command.lignes}">
                     ${ligne.produit.libelle} /
                     Quantite : ${ligne.quantite} /
-                    Prix: ${ligne.produit.prix}
+                    Prix: ${ligne.produit.prix*ligne.quantite}
                     <img src="${ligne.produit.image}"  width="50" height="50"/> <br>
                 </c:forEach>
             </td>
         </tr>
     </div>
 </c:forEach>
-
+<br>
+<a href="http://localhost:8090/eboutique-web/accueil">retour</a>
 </body>
 </html>
 

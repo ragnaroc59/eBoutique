@@ -5,8 +5,6 @@ import fr.epsi.eboutique.business.entity.Produit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -92,16 +90,8 @@ public class ProduitDao {
     }
 
     public Produit findProduitById(Long productId){
-        EntityManagerFactory factory = Persistence
-                .createEntityManagerFactory("eboutique-business");
-        entityManager = factory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        List<Object[]> produitList = entityManager.createNativeQuery(
+        List<Object[]> produitList = this.entityManager.createNativeQuery(
                 "SELECT * FROM Produit WHERE id  = :productId").setParameter("productId",productId).getResultList();
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        factory.close();
 
         if (produitList == null) {
             System.out.println("Pas de marque trouvée ! ");

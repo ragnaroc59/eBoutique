@@ -1,17 +1,14 @@
 package fr.epsi.eboutique.business.dao;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import fr.epsi.eboutique.business.entity.Marque;
 
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-
-import fr.epsi.eboutique.business.entity.Marque;
+import java.util.Collection;
+import java.util.List;
 
 @Named
 public class MarqueDao {
@@ -58,16 +55,8 @@ public class MarqueDao {
 
   public Marque findByLibelle(String libelle){
 
-    EntityManagerFactory factory = Persistence
-            .createEntityManagerFactory("eboutique-business");
-    entityManager = factory.createEntityManager();
-    entityManager.getTransaction().begin();
-
-    List<Object[]> marqueList = entityManager.createNativeQuery(
+    List<Object[]> marqueList = this.entityManager.createNativeQuery(
             "SELECT * FROM Marque m WHERE libelle = :lbl").setParameter("lbl",libelle).getResultList();
-    entityManager.getTransaction().commit();
-    entityManager.close();
-    factory.close();
     Marque marque = new Marque();
 
     if (marqueList == null) {
@@ -84,16 +73,8 @@ public class MarqueDao {
   }
 
   public Marque findById(Long marqueId){
-    EntityManagerFactory factory = Persistence
-            .createEntityManagerFactory("eboutique-business");
-    entityManager = factory.createEntityManager();
-    entityManager.getTransaction().begin();
-
     List<Object[]> marqueList = entityManager.createNativeQuery(
             "SELECT * FROM Marque m WHERE id = :marqueId").setParameter("marqueId",marqueId).getResultList();
-    entityManager.getTransaction().commit();
-    entityManager.close();
-    factory.close();
     Marque marque = new Marque();
 
     if (marqueList == null) {

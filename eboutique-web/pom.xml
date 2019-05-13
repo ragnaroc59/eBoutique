@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>eboutique-web</artifactId>
   <packaging>war</packaging>
-  <name>business Maven Webapp</name>
+  <name>Agzibuyuk Zeynel AltB3-A</name>
   <url>http://maven.apache.org</url>
   <properties>
     <spring.version>5.1.4.RELEASE</spring.version>

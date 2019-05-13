@@ -17,4 +17,11 @@ public class CommandeService {
         return this.commandeDao.findAll();
     }
 
+    public boolean createCommande(Commande command) {
+        return this.commandeDao.createCommande(command);
+    }
+
+    public Object getCommandeById(Long idCommand) {
+        return this.commandeDao.getCommandeById(idCommand);
+    }
 }

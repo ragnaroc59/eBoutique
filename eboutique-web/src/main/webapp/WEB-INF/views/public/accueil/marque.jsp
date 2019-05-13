@@ -37,6 +37,10 @@
         </div>
     </c:forEach>
 <main>
+    </br>
+    <div>
+      <a href="http://localhost:8090/eboutique-web/accueil">retour</a>
+    <div>
 </body>
 </html>
 

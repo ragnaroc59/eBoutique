@@ -23,6 +23,7 @@
                <c:forEach var="marque" items="${marques}">
                  <a class="nav-link" href="http://localhost:8090/eboutique-web/accueil/${marque.libelle}">${marque.libelle}</a>
                </c:forEach>
+              <a class="nav-link" href="http://localhost:8090/eboutique-web/commande">Votre panier</a>
 			</nav>
 		</div>
 	</nav>
